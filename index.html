@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="ko" class="h-full">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>머묾 (Meomul) - 감성 한옥 숙박 & 정겨운 인연 플랫폼</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        meomul: {
+                            bg: '#FDFBF7',
+                            card: '#FFFDF9',
+                            primary: '#C86D51',
+                            primaryHover: '#B25A3F',
+                            secondary: '#E8A87C',
+                            accent: '#F3C583',
+                            wood: '#5C4033',
+                            dark: '#2D2926',
+                            muted: '#8C827A',
+                            soft: '#FAF3EB',
+                            egg: '#FFF8E7',
+                            eggBorder: '#F5E2B3'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Pretendard', '-apple-system', 'BlinkMacSystemFont', 'system-ui', 'Roboto', 'sans-serif'],
+                        serif: ['MaruBuri', 'Nanum Myeongjo', 'Batang', 'serif']
+                    },
+                    boxShadow: {
+                        'phone': '0 25px 50px -12px rgba(92, 64, 51, 0.25)',
+                        'glow': '0 0 20px rgba(200, 109, 81, 0.15)'
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
+        @import url('https://fonts.googleapis.com/css2?family=Nanum+Myeongjo:wght@400;700;800&display=swap');
+
+        body {
+            font-family: 'Pretendard', sans-serif;
+            background-color: #F8F5F0;
+            color: #2D2926;
+            overflow-x: hidden;
+        }
+
+        .font-serif-kr {
+            font-family: 'Nanum Myeongjo', serif;
+        }
+
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col justify-between selection:bg-meomul-secondary selection:text-white">
+
+    <!-- Header / Brand Bar -->
+    <header class="w-full bg-meomul-bg/90 backdrop-blur-md border-b border-meomul-wood/10 sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-2xl bg-gradient-to-br from-meomul-primary to-meomul-secondary flex items-center justify-center text-white font-serif-kr font-bold text-xl shadow-sm">
+                    머
+                </div>
+                <div>
+                    <span class="font-serif-kr font-bold text-xl text-meomul-dark tracking-wide">머묾</span>
+                    <span class="text-xs ml-2 px-2 py-0.5 rounded-full bg-meomul-soft text-meomul-primary font-medium">따뜻한 만남의 머무름</span>
+                </div>
+            </div>
+
+            <div class="hidden md:flex items-center gap-6 text-sm">
+                <span class="text-meomul-muted font-serif-kr italic">“사랑 손님, 이젠 하숙 안 합니다”</span>
+                <span class="h-3 w-px bg-meomul-wood/20"></span>
+                <a href="#prototype" class="text-meomul-dark hover:text-meomul-primary font-medium transition">시연 앱 체험</a>
+                <a href="#characters" class="text-meomul-dark hover:text-meomul-primary font-medium transition">등장인물</a>
+            </div>
+
+            <div>
+                <button onclick="scrollToApp()" class="px-4 py-2 bg-meomul-primary text-white text-xs sm:text-sm font-medium rounded-xl hover:bg-meomul-primaryHover transition shadow-md flex items-center gap-2">
+                    <i class="fa-solid fa-mobile-screen"></i>
+                    <span>앱 화면 바로보기</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <main class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
+        
+        <!-- Hero Section -->
+        <div class="text-center max-w-3xl mx-auto mb-10 sm:mb-16">
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-meomul-egg border border-meomul-eggBorder text-meomul-primary text-xs font-semibold mb-4">
+                <i class="fa-solid fa-egg text-meomul-secondary"></i>
+                특화 서비스 '삶은 계란, 삶은 걔랑' 탑재
+            </div>
+            <h1 class="font-serif-kr text-3xl sm:text-5xl font-extrabold text-meomul-dark tracking-tight leading-tight mb-4">
+                마음이 쉬어가는 곳,<br>
+                <span class="text-meomul-primary">공간과 사람</span>에 머무르다
+            </h1>
+            <p class="text-meomul-muted text-base sm:text-lg leading-relaxed font-light">
+                현대 소설 『사랑 손님과 어머니』의 아련한 설렘을 현대적 감성 숙박 플랫폼으로 재해석했습니다.
+            </p>
+        </div>
+
+        <!-- App Presentation Area -->
+        <div id="prototype" class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start mb-20">
+            
+            <!-- LEFT: Mobile App Frame -->
+            <div class="lg:col-span-6 xl:col-span-5 flex justify-center sticky top-24">
+                <div class="relative w-[340px] sm:w-[375px] h-[750px] bg-meomul-dark rounded-[50px] p-3 shadow-phone border-4 border-stone-800">
+                    
+                    <div class="absolute -left-4 top-28 w-1 h-12 bg-stone-700 rounded-l"></div>
+                    <div class="absolute -left-4 top-44 w-1 h-12 bg-stone-700 rounded-l"></div>
+                    <div class="absolute -right-4 top-36 w-1 h-16 bg-stone-700 rounded-r"></div>
+
+                    <!-- Inner Device Screen Container -->
+                    <div class="relative w-full h-full bg-meomul-bg rounded-[38px] overflow-hidden flex flex-col justify-between border border-stone-200">
+                        
+                        <!-- Status Bar -->
+                        <div class="bg-meomul-bg pt-3 px-6 pb-2 flex justify-between items-center text-xs text-meomul-dark font-semibold z-30 select-none">
+                            <span>09:41</span>
+                            <div class="w-24 h-5 bg-stone-900 rounded-full flex items-center justify-end px-2 gap-1.5">
+                                <div class="w-2 h-2 rounded-full bg-blue-900/60"></div>
+                                <div class="w-1.5 h-1.5 rounded-full bg-stone-700"></div>
+                            </div>
+                            <div class="flex items-center gap-1 text-[10px]">
+                                <i class="fa-solid fa-signal"></i>
+                                <i class="fa-solid fa-wifi"></i>
+                                <i class="fa-solid fa-battery-full text-xs"></i>
+                            </div>
+                        </div>
+
+                        <!-- APP SCREEN VIEWPORT -->
+                        <div id="appViewport" class="flex-1 overflow-y-auto no-scrollbar relative bg-meomul-bg">
+                            
+                            <!-- TAB 1: HOME -->
+                            <div id="screen-home" class="app-screen space-y-4 pb-20 p-4">
+                                <div class="flex items-center justify-between">
+                                    <div>
+                                        <h2 class="font-serif-kr text-xl font-bold text-meomul-dark">머묾</h2>
+                                        <p class="text-[10px] text-meomul-muted">따뜻한 만남이 있는 숙소</p>
+                                    </div>
+                                    <div class="flex items-center gap-2">
+                                        <button onclick="triggerNotificationSim()" class="relative p-2 rounded-full bg-white border border-stone-100 text-meomul-dark text-xs hover:bg-meomul-soft">
+                                            <i class="fa-regular fa-bell"></i>
+                                            <span class="absolute top-1 right-1 w-2 h-2 bg-meomul-primary rounded-full"></span>
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <!-- Slogan Banner -->
+                                <div class="relative rounded-2xl bg-gradient-to-r from-meomul-primary to-meomul-secondary p-4 text-white overflow-hidden shadow-sm">
+                                    <div class="absolute -right-4 -bottom-4 opacity-20 text-6xl font-serif-kr">머묾</div>
+                                    <span class="px-2 py-0.5 rounded-full bg-white/20 text-[10px] font-medium backdrop-blur-sm">광고 메인 슬로건</span>
+                                    <h3 class="font-serif-kr text-base font-bold mt-2 leading-tight">사랑 손님, 이젠<br>하숙 안 합니다</h3>
+                                    <p class="text-[11px] opacity-90 mt-1">머묾 앱으로 쉽고 명확하게 연박 예약하세요</p>
+                                    <button onclick="switchTab('egg')" class="mt-3 px-3 py-1 bg-white text-meomul-primary rounded-xl text-xs font-bold hover:bg-meomul-soft transition">
+                                        삶은 걔랑 모임 보기 <i class="fa-solid fa-arrow-right text-[10px] ml-1"></i>
+                                    </button>
+                                </div>
+
+                                <!-- Special Feature Card -->
+                                <div onclick="switchTab('egg')" class="cursor-pointer bg-meomul-egg border border-meomul-eggBorder rounded-2xl p-3.5 flex items-center justify-between hover:shadow-md transition">
+                                    <div class="flex items-center gap-3">
+                                        <div class="w-10 h-10 rounded-xl bg-meomul-accent/40 flex items-center justify-center text-meomul-primary text-xl">
+                                            🥚
+                                        </div>
+                                        <div>
+                                            <div class="flex items-center gap-1.5">
+                                                <h4 class="font-bold text-xs text-meomul-dark">삶은 계란, 삶은 걔랑</h4>
+                                                <span class="px-1.5 py-0.2 bg-meomul-primary/10 text-meomul-primary text-[9px] font-semibold rounded">특화 서비스</span>
+                                            </div>
+                                            <p class="text-[10px] text-meomul-muted mt-0.5">함께 힐링과 데이트를, 따뜻한 차를</p>
+                                        </div>
+                                    </div>
+                                    <i class="fa-solid fa-chevron-right text-xs text-meomul-muted"></i>
+                                </div>
+
+                                <div>
+                                    <div class="flex items-center justify-between mb-2">
+                                        <h3 class="font-bold text-xs text-meomul-dark font-serif-kr">오늘의 머묾 추천 숙소</h3>
+                                        <span class="text-[10px] text-meomul-primary font-medium">전체보기</span>
+                                    </div>
+
+                                    <!-- Stay Card 1 -->
+                                    <div class="bg-white rounded-2xl p-3 border border-stone-100 shadow-sm space-y-2 mb-3">
+                                        <div class="relative h-32 rounded-xl bg-stone-200 overflow-hidden bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1590523741831-ab7e8b8f9c7f?auto=format&fit=crop&w=600&q=80')">
+                                            <span class="absolute top-2 left-2 px-2 py-0.5 rounded-md bg-stone-900/60 backdrop-blur-sm text-white text-[9px]">사랑방</span>
+                                            <span class="absolute top-2 right-2 px-2 py-0.5 rounded-md bg-meomul-primary text-white text-[9px] font-bold">3주 장기연박 할인중</span>
+                                        </div>
+                                        <div class="flex justify-between items-start pt-1">
+                                            <div>
+                                                <h4 class="font-bold text-xs text-meomul-dark">풍금 연주자의 어머니 사랑방</h4>
+                                                <p class="text-[10px] text-meomul-muted"><i class="fa-solid fa-location-dot text-meomul-primary"></i> 전북 전주시 한옥마을길 · 툇마루 연결</p>
+                                            </div>
+                                            <div class="text-right">
+                                                <span class="text-xs font-bold text-meomul-primary">₩75,000</span>
+                                                <span class="text-[9px] text-meomul-muted block">/ 1박 기준</span>
+                                            </div>
+                                        </div>
+                                        <div class="flex items-center justify-between pt-2 border-t border-stone-100 text-[10px] text-stone-600">
+                                            <span><i class="fa-solid fa-star text-amber-400"></i> 4.98 (리뷰 48개)</span>
+                                            <span class="text-meomul-primary font-medium bg-meomul-soft px-2 py-0.5 rounded">풍금 연주자 답글 100%</span>
+                                        </div>
+                                    </div>
+
+                                    <!-- Stay Card 2 -->
+                                    <div class="bg-white rounded-2xl p-3 border border-stone-100 shadow-sm space-y-2 mb-3">
+                                        <div class="relative h-32 rounded-xl bg-stone-200 overflow-hidden bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?auto=format&fit=crop&w=600&q=80')">
+                                            <span class="absolute top-2 left-2 px-2 py-0.5 rounded-md bg-stone-900/60 backdrop-blur-sm text-white text-[9px]">행랑채</span>
+                                            <span class="absolute top-2 right-2 px-2 py-0.5 rounded-md bg-meomul-secondary text-white text-[9px] font-bold">인기 숙소</span>
+                                        </div>
+                                        <div class="flex justify-between items-start pt-1">
+                                            <div>
+                                                <h4 class="font-bold text-xs text-meomul-dark">행랑채 온돌방 & 툇마루 차담</h4>
+                                                <p class="text-[10px] text-meomul-muted"><i class="fa-solid fa-location-dot text-meomul-primary"></i> 경북 안동시 하회마을 · 풍경 조망</p>
+                                            </div>
+                                            <div class="text-right">
+                                                <span class="text-xs font-bold text-meomul-primary">₩60,000</span>
+                                                <span class="text-[9px] text-meomul-muted block">/ 1박 기준</span>
+                                            </div>
+                                        </div>
+                                        <div class="flex items-center justify-between pt-2 border-t border-stone-100 text-[10px] text-stone-600">
+                                            <span><i class="fa-solid fa-star text-amber-400"></i> 4.88 (리뷰 32개)</span>
+                                            <span class="text-meomul-primary font-medium bg-meomul-soft px-2 py-0.5 rounded">차담 다도세트 제공</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- TAB 2: 삶은 걔랑 -->
+                            <div id="screen-egg" class="app-screen space-y-4 pb-20 p-4 hidden">
+                                <div class="bg-gradient-to-r from-meomul-egg to-amber-100/50 p-4 rounded-2xl border border-meomul-eggBorder">
+                                    <div class="flex items-center gap-2 mb-1">
+                                        <span class="text-xl">🥚</span>
+                                        <h2 class="font-serif-kr text-base font-bold text-meomul-dark">삶은 걔랑</h2>
+                                    </div>
+                                    <p class="text-[11px] text-meomul-muted leading-relaxed">
+                                        “휴가와 새로운 인연을 찾는 따뜻한 사랑방 모임”<br>
+                                        함께 힐링과 데이트를, 따뜻한 차를 나누며 인연을 만드는 공간입니다.
+                                    </p>
+                                </div>
+
+                                <!-- Host Card -->
+                                <div class="bg-white p-3 rounded-2xl border border-stone-100 flex items-center gap-3 shadow-sm">
+                                    <div class="w-10 h-10 rounded-full bg-meomul-soft border border-meomul-secondary flex items-center justify-center text-lg font-serif-kr font-bold text-meomul-primary">
+                                        🎹
+                                    </div>
+                                    <div class="flex-1">
+                                        <div class="flex items-center justify-between">
+                                            <h4 class="text-xs font-bold text-meomul-dark">풍금 연주자의 오늘 사랑방</h4>
+                                            <span class="text-[9px] bg-red-100 text-red-600 font-bold px-1.5 py-0.5 rounded">오늘 저녁 7시</span>
+                                        </div>
+                                        <p class="text-[10px] text-meomul-muted mt-0.5">“오늘 따뜻한 둥굴레차와 잔잔한 풍금 연주를 준비해 두었습니다. 오셔서 담소 나누세요.”</p>
+                                    </div>
+                                </div>
+
+                                <div class="space-y-3">
+                                    <h3 class="font-bold text-xs text-meomul-dark font-serif-kr">열린 정겨운 차담 모임</h3>
+                                    
+                                    <!-- Post 1: 룰루랄라 -->
+                                    <div class="bg-white p-3 rounded-2xl border border-stone-100 shadow-sm hover:border-meomul-secondary transition">
+                                        <div class="flex items-center justify-between text-[10px] text-meomul-muted mb-1.5">
+                                            <span><i class="fa-solid fa-mug-hot text-meomul-secondary"></i> 툇마루 다도 모임</span>
+                                            <span class="text-meomul-primary font-bold">3명 참여 중 / 정원 5명</span>
+                                        </div>
+                                        <h4 class="font-bold text-xs text-meomul-dark mb-1">“혼자 온 여행객끼리 잔잔한 차담 나눌 분 구해요”</h4>
+                                        <p class="text-[10px] text-stone-500 line-clamp-2">급하게 찾아온 숙소인데 정경이 너무 아름답네요. 저녁 먹고 사랑방에서 소소하게 이야기 나누실 분 구합니다.</p>
+                                        <div class="flex items-center justify-between mt-3 pt-2 border-t border-stone-50 text-[10px]">
+                                            <span class="text-stone-400">작성자: 룰루랄라</span>
+                                            <button onclick="alert('모임 참여 신청이 완료되었습니다!')" class="px-2.5 py-1 bg-meomul-primary text-white rounded-lg font-medium text-[10px]">함께하기</button>
+                                        </div>
+                                    </div>
+
+                                    <!-- Post 2: 별보기 모임 -->
+                                    <div class="bg-white p-3 rounded-2xl border border-stone-100 shadow-sm">
+                                        <div class="flex items-center justify-between text-[10px] text-meomul-muted mb-1.5">
+                                            <span><i class="fa-solid fa-moon text-indigo-400"></i> 밤하늘 별보기 & 산책</span>
+                                            <span class="text-stone-400">마감 임박</span>
+                                        </div>
+                                        <h4 class="font-bold text-xs text-meomul-dark mb-1">“마당 툇마루에서 3번 4번 남자와 함께 별 보실 여자분 두 분 계신가요?”</h4>
+                                        <p class="text-[10px] text-stone-500">숙소 주인분께서 끓여주신 둥굴레차 마시면서 주변 산책할 수 있어요!</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- TAB 3: 연박/예약 -->
+                            <div id="screen-booking" class="app-screen space-y-4 pb-20 p-4 hidden">
+                                <div class="flex items-center justify-between">
+                                    <h2 class="font-serif-kr text-base font-bold text-meomul-dark">나의 숙박 & 연박 예약</h2>
+                                    <span class="text-[10px] px-2 py-0.5 bg-green-100 text-green-700 font-bold rounded-full">3주 장기 투숙 중</span>
+                                </div>
+
+                                <div class="bg-white p-4 rounded-2xl border border-meomul-wood/15 shadow-sm space-y-3">
+                                    <div class="flex items-center justify-between border-b border-stone-100 pb-2">
+                                        <div>
+                                            <h3 class="font-bold text-xs text-meomul-dark">사랑 손님 님의 예약 정보</h3>
+                                            <p class="text-[10px] text-meomul-muted">숙소명: 풍금 연주자의 어머니 사랑방</p>
+                                        </div>
+                                        <span class="text-xs font-serif-kr text-meomul-primary font-bold">입실 중</span>
+                                    </div>
+
+                                    <div class="bg-meomul-soft p-3 rounded-xl border border-meomul-secondary/20 space-y-1.5 text-xs">
+                                        <div class="flex justify-between">
+                                            <span class="text-stone-500">총 이용 기간:</span>
+                                            <span class="font-bold text-meomul-primary">2026.06.15 ~ 2026.07.06 (3주간 / 21박)</span>
+                                        </div>
+                                        <div class="flex justify-between">
+                                            <span class="text-stone-500">체크아웃 퇴실일:</span>
+                                            <span class="font-semibold text-stone-800">2026.07.06 (월)</span>
+                                        </div>
+                                        
+                                        <div class="mt-3 pt-2 border-t border-stone-200">
+                                            <button onclick="extendStaySimulation()" class="w-full py-2 bg-meomul-primary text-white font-bold text-xs rounded-xl hover:bg-meomul-primaryHover transition shadow-sm flex items-center justify-center gap-1.5">
+                                                <i class="fa-solid fa-calendar-plus"></i> 숙박 1일 더 연장하기
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div id="notificationAlert" class="hidden bg-stone-900 text-white p-3 rounded-xl text-xs space-y-1 shadow-lg transition-all animate-bounce">
+                                    <div class="flex items-center justify-between text-stone-400 text-[10px]">
+                                        <span><i class="fa-solid fa-bell text-amber-400"></i> 머묾 알림 Center</span>
+                                        <span>방금 전</span>
+                                    </div>
+                                    <p class="font-bold text-amber-200">“이용 기간이 1일 성공적으로 연장되었습니다!”</p>
+                                    <p class="text-[10px] text-stone-300">풍금 연주자: “손님, 방 비워두었습니다. 편히 더 머물다 가셔요.”</p>
+                                </div>
+                            </div>
+
+                            <!-- TAB 4: 정겨운 후기 -->
+                            <div id="screen-review" class="app-screen space-y-4 pb-20 p-4 hidden">
+                                <div class="flex items-center justify-between">
+                                    <div>
+                                        <h2 class="font-serif-kr text-base font-bold text-meomul-dark">정겨운 후기</h2>
+                                        <p class="text-[10px] text-meomul-muted">마음으로 주고받는 투숙객들의 이야기</p>
+                                    </div>
+                                    <button onclick="openReviewModal()" class="px-2.5 py-1 bg-meomul-secondary text-white text-[10px] font-bold rounded-lg shadow-sm">
+                                        + 후기 쓰기
+                                    </button>
+                                </div>
+
+                                <!-- Review Item 1: 사랑 손님 -->
+                                <div class="bg-white p-3.5 rounded-2xl border border-stone-100 shadow-sm space-y-2.5">
+                                    <div class="flex justify-between items-start">
+                                        <div class="flex items-center gap-2">
+                                            <div class="w-7 h-7 rounded-full bg-stone-100 flex items-center justify-center text-xs font-bold text-meomul-dark">
+                                                손님
+                                            </div>
+                                            <div>
+                                                <h4 class="text-xs font-bold text-meomul-dark">사랑 손님</h4>
+                                                <div class="text-amber-400 text-[10px]">
+                                                    <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                                                    <span class="text-stone-400 text-[9px] ml-1">2026.07.06</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <span class="px-2 py-0.5 rounded bg-amber-50 text-amber-700 text-[9px] font-bold">베스트 후기</span>
+                                    </div>
+
+                                    <!-- Acrostic Poem Review Content -->
+                                    <div class="bg-meomul-soft/80 p-3 rounded-xl text-xs font-serif-kr text-stone-800 space-y-1 border border-meomul-wood/10">
+                                        <p><span class="font-bold text-meomul-primary">또</span> : 또 오고 싶어요 ♡</p>
+                                        <p><span class="font-bold text-meomul-primary">봐</span> : 봐도봐도 좋은 숙소예요</p>
+                                        <p><span class="font-bold text-meomul-primary">요</span> : 요즘 제일 생각나요 :)</p>
+                                    </div>
+
+                                    <!-- Host Reply -->
+                                    <div class="bg-stone-50 p-2.5 rounded-xl border border-stone-100 text-[11px] space-y-1 ml-3 border-l-2 border-l-meomul-primary">
+                                        <div class="flex items-center justify-between">
+                                            <span class="font-bold text-meomul-primary text-[10px]"><i class="fa-solid fa-reply rotate-180 mr-1"></i> 풍금 연주자의 감사 답글</span>
+                                            <span class="text-[9px] text-stone-400">2026.07.06</span>
+                                        </div>
+                                        <p class="text-stone-600 font-sans leading-relaxed">
+                                            "손님, 3주간의 긴 머무름과 고운 삼행시 선물 감사해요. 달달한 둥굴레차 또 끓여놓고 기다릴 테니 언제든 오셔요."
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <!-- Review Item 2: 자연사랑 님 (기존 리뷰 복원) -->
+                                <div class="bg-white p-3.5 rounded-2xl border border-stone-100 shadow-sm space-y-2.5">
+                                    <div class="flex justify-between items-start">
+                                        <div class="flex items-center gap-2">
+                                            <div class="w-7 h-7 rounded-full bg-stone-100 flex items-center justify-center text-xs font-bold text-meomul-dark">
+                                                자연
+                                            </div>
+                                            <div>
+                                                <h4 class="text-xs font-bold text-meomul-dark">자연사랑 님</h4>
+                                                <div class="text-amber-400 text-[10px]">
+                                                    <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                                                    <span class="text-stone-400 text-[9px] ml-1">2026.07.01</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <p class="text-xs text-stone-600 leading-relaxed">
+                                        풍금 소리가 아침마다 나지막이 들려서 기분 좋게 깼어요. 삶은 계란도 너무 촉촉하고 인연도 만들고 갑니다.
+                                    </p>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <!-- Bottom Tab Bar -->
+                        <div class="bg-white/95 backdrop-blur-md border-t border-stone-200 px-3 py-2 flex justify-around items-center z-40">
+                            <button onclick="switchTab('home')" id="tab-home" class="tab-btn active flex flex-col items-center gap-1 text-meomul-primary">
+                                <i class="fa-solid fa-house text-sm"></i>
+                                <span class="text-[9px] font-medium">홈</span>
+                            </button>
+                            <button onclick="switchTab('egg')" id="tab-egg" class="tab-btn flex flex-col items-center gap-1 text-stone-400 hover:text-meomul-primary">
+                                <i class="fa-solid fa-egg text-sm"></i>
+                                <span class="text-[9px] font-medium">삶은 걔랑</span>
+                            </button>
+                            <button onclick="switchTab('booking')" id="tab-booking" class="tab-btn flex flex-col items-center gap-1 text-stone-400 hover:text-meomul-primary">
+                                <i class="fa-solid fa-calendar-check text-sm"></i>
+                                <span class="text-[9px] font-medium">연박/예약</span>
+                            </button>
+                            <button onclick="switchTab('review')" id="tab-review" class="tab-btn flex flex-col items-center gap-1 text-stone-400 hover:text-meomul-primary">
+                                <i class="fa-solid fa-heart text-sm"></i>
+                                <span class="text-[9px] font-medium">정겨운 후기</span>
+                            </button>
+                        </div>
+
+                        <!-- Home Bar Indicator -->
+                        <div class="bg-white pb-1.5 flex justify-center">
+                            <div class="w-28 h-1 bg-stone-300 rounded-full"></div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <!-- RIGHT: Presentation Controls & Storyboard Cuts -->
+            <div class="lg:col-span-6 xl:col-span-7 space-y-6">
+                
+                <!-- Storyboard Interactive Cut Buttons -->
+                <div class="bg-white p-5 rounded-3xl border border-meomul-wood/10 shadow-sm space-y-4">
+                    <div class="flex items-center justify-between border-b border-stone-100 pb-3">
+                        <h3 class="font-serif-kr text-lg font-bold text-meomul-dark flex items-center gap-2">
+                            <i class="fa-solid fa-film text-meomul-primary"></i>
+                            광고 스토리보드 장면 시연
+                        </h3>
+                        <span class="text-xs text-meomul-muted">버튼 클릭 시 해당 장면 화면으로 즉시 전환</span>
+                    </div>
+
+                    <div class="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
+                        <button onclick="switchTab('home')" class="p-3 rounded-xl border border-stone-200 text-left hover:border-meomul-primary hover:bg-meomul-soft/50 transition group">
+                            <div class="text-meomul-primary text-xs font-bold mb-1">컷 2-2</div>
+                            <div class="text-xs font-bold text-meomul-dark">메인 홈</div>
+                            <div class="text-[10px] text-meomul-muted">슬로건 배너 클로즈업</div>
+                        </button>
+                        <button onclick="switchTab('egg')" class="p-3 rounded-xl border border-stone-200 text-left hover:border-meomul-primary hover:bg-meomul-soft/50 transition group">
+                            <div class="text-amber-500 text-xs font-bold mb-1">컷 2-3</div>
+                            <div class="text-xs font-bold text-meomul-dark">삶은 걔랑</div>
+                            <div class="text-[10px] text-meomul-muted">차담 & 정겨운 모임</div>
+                        </button>
+                        <button onclick="switchTab('booking'); triggerNotificationSim();" class="p-3 rounded-xl border border-stone-200 text-left hover:border-meomul-primary hover:bg-meomul-soft/50 transition group">
+                            <div class="text-green-600 text-xs font-bold mb-1">컷 3-3 & 4-2</div>
+                            <div class="text-xs font-bold text-meomul-dark">연박/예약</div>
+                            <div class="text-[10px] text-meomul-muted">숙박 연장 알림 "띠링"</div>
+                        </button>
+                        <button onclick="switchTab('review')" class="p-3 rounded-xl border border-stone-200 text-left hover:border-meomul-primary hover:bg-meomul-soft/50 transition group">
+                            <div class="text-rose-500 text-xs font-bold mb-1">컷 3-4</div>
+                            <div class="text-xs font-bold text-meomul-dark">정겨운 후기</div>
+                            <div class="text-[10px] text-meomul-muted">또.봐.요 삼행시 후기</div>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Characters Profile Summary -->
+                <div class="bg-meomul-soft p-5 rounded-3xl border border-meomul-secondary/30 space-y-4" id="characters">
+                    <h3 class="font-serif-kr text-base font-bold text-meomul-dark">등장인물 정보</h3>
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                        <div class="bg-white p-3 rounded-2xl border border-stone-100 shadow-sm">
+                            <h4 class="font-serif-kr text-xs font-bold text-meomul-dark">어머니 (24세)</h4>
+                            <p class="text-[10px] text-meomul-primary font-medium">풍금 연주자 · 숙소 운영자</p>
+                            <p class="text-[10px] text-stone-500 mt-1">투숙객 리뷰에 감사 답글 달기를 즐김.</p>
+                        </div>
+                        <div class="bg-white p-3 rounded-2xl border border-stone-100 shadow-sm">
+                            <h4 class="font-serif-kr text-xs font-bold text-meomul-dark">사랑 손님 (20대 중후반)</h4>
+                            <p class="text-[10px] text-amber-700 font-medium">3주 장기 투숙 여행객</p>
+                            <p class="text-[10px] text-stone-500 mt-1">3주간(06.15~07.06) 머무르며 후기 작성.</p>
+                        </div>
+                        <div class="bg-white p-3 rounded-2xl border border-stone-100 shadow-sm">
+                            <h4 class="font-serif-kr text-xs font-bold text-meomul-dark">옥희 (6세)</h4>
+                            <p class="text-[10px] text-rose-600 font-medium">순수한 메신저 관찰자</p>
+                            <p class="text-[10px] text-stone-500 mt-1">툇마루에서 맑은 시선으로 마음을 이어줌.</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Modal Simulator -->
+    <div id="reviewModal" class="fixed inset-0 bg-stone-900/60 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
+        <div class="bg-white w-full max-w-md rounded-3xl p-6 space-y-4 shadow-2xl border border-stone-100">
+            <div class="flex justify-between items-center border-b border-stone-100 pb-3">
+                <h3 class="font-serif-kr font-bold text-meomul-dark text-base">후기 작성하기</h3>
+                <button onclick="closeReviewModal()" class="text-stone-400 hover:text-stone-600"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <div class="space-y-3">
+                <div>
+                    <label class="text-[11px] font-bold text-meomul-primary block mb-1">또</label>
+                    <input type="text" value="또 오고 싶어요 ♡" class="w-full bg-stone-50 border border-stone-200 rounded-xl px-3 py-2 text-xs">
+                </div>
+                <div>
+                    <label class="text-[11px] font-bold text-meomul-primary block mb-1">봐</label>
+                    <input type="text" value="봐도봐도 좋은 숙소예요" class="w-full bg-stone-50 border border-stone-200 rounded-xl px-3 py-2 text-xs">
+                </div>
+                <div>
+                    <label class="text-[11px] font-bold text-meomul-primary block mb-1">요</label>
+                    <input type="text" value="요즘 제일 생각나요 :)" class="w-full bg-stone-50 border border-stone-200 rounded-xl px-3 py-2 text-xs">
+                </div>
+            </div>
+            <button onclick="submitReviewSim()" class="w-full py-2.5 bg-meomul-primary text-white font-bold text-xs rounded-xl hover:bg-meomul-primaryHover transition">
+                후기 등록하기
+            </button>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-meomul-bg border-t border-meomul-wood/10 py-8 text-center text-xs text-meomul-muted">
+        <div class="max-w-7xl mx-auto px-4 space-y-2">
+            <p class="font-serif-kr font-bold text-meomul-dark text-sm">머묾 (Meomul) - 기획 및 시연 프로토타입</p>
+        </div>
+    </footer>
+
+    <!-- Interactive Script -->
+    <script>
+        function switchTab(tabName) {
+            const screens = document.querySelectorAll('.app-screen');
+            screens.forEach(s => s.classList.add('hidden'));
+
+            const targetScreen = document.getElementById(`screen-${tabName}`);
+            if (targetScreen) targetScreen.classList.remove('hidden');
+
+            const buttons = document.querySelectorAll('.tab-btn');
+            buttons.forEach(b => {
+                b.classList.remove('text-meomul-primary');
+                b.classList.add('text-stone-400');
+            });
+
+            const activeBtn = document.getElementById(`tab-${tabName}`);
+            if (activeBtn) {
+                activeBtn.classList.remove('text-stone-400');
+                activeBtn.classList.add('text-meomul-primary');
+            }
+        }
+
+        function extendStaySimulation() {
+            const alertBox = document.getElementById('notificationAlert');
+            alertBox.classList.remove('hidden');
+            setTimeout(() => {
+                alertBox.scrollIntoView({ behavior: 'smooth' });
+            }, 100);
+        }
+
+        function triggerNotificationSim() {
+            switchTab('booking');
+            extendStaySimulation();
+        }
+
+        function openReviewModal() {
+            document.getElementById('reviewModal').classList.remove('hidden');
+        }
+
+        function closeReviewModal() {
+            document.getElementById('reviewModal').classList.add('hidden');
+        }
+
+        function submitReviewSim() {
+            closeReviewModal();
+            switchTab('review');
+            alert("후기가 등록되었습니다!");
+        }
+
+        function scrollToApp() {
+            document.getElementById('prototype').scrollIntoView({ behavior: 'smooth' });
+        }
+    </script>
+</body>
+</html>
